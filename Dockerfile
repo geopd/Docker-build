@@ -13,7 +13,12 @@ RUN apt-get -yqq update \
     && TZ=Asia/Kolkata \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN git clone --depth=1 https://github.com/mvaisakh/gcc-arm64 -b gcc-master /tmp/gcc
+# Setup Toolchains
+RUN export GCC_DIR=/tmp/gcc \
+    && git clone --depth=1 https://github.com/mvaisakh/gcc-arm -b gcc-master $GCC_DIR/gcc32 \
+    && git clone --depth=1 https://github.com/mvaisakh/gcc-arm64 -b gcc-master $GCC_DIR/gcc64 \
+    && export GCC32_DIR=$GCC_DIR/gcc32 && export GCC64_DIR=$GCC_DIR/gcc64 \
+    && export PATH=$GCC64_DIR/bin/:$GCC32_DIR/bin/:/usr/bin:$PATH
 
 VOLUME ["/tmp/ccache", "/tmp/msm8953"]
 ENTRYPOINT ["/bin/bash"]

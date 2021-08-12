@@ -10,8 +10,8 @@ RUN pacman -Syyu --noconfirm \
 
 # Setup Toolchains
 RUN export GCC_DIR=/tmp/gcc \
-    && git clone --depth=1 https://github.com/mvaisakh/gcc-arm -b gcc-master $GCC_DIR/gcc32 \
-    && git clone --depth=1 https://github.com/mvaisakh/gcc-arm64 -b gcc-master $GCC_DIR/gcc64
+    && git clone --depth=1 https://github.com/arter97/arm32-gcc -b master $GCC_DIR/gcc32 \
+    && git clone --depth=1 https://github.com/arter97/arm64-gcc -b master $GCC_DIR/gcc64
 
 VOLUME ["/tmp/gcc"]
 ENTRYPOINT ["/bin/bash"]

@@ -13,9 +13,5 @@ RUN export GCC_DIR=/tmp/gcc \
     && git clone --depth=1 https://github.com/mvaisakh/gcc-arm -b gcc-master $GCC_DIR/gcc32 \
     && git clone --depth=1 https://github.com/mvaisakh/gcc-arm64 -b gcc-master $GCC_DIR/gcc64
 
-# Setup Proton Clang Toolchains
-RUN export CLANG_DIR=/tmp/proton \
-    && git clone --depth=1 https://github.com/kdrag0n/proton-clang $CLANG_DIR
-
-VOLUME ["/tmp/gcc", "/tmp/proton"]
+VOLUME ["/tmp/gcc"]
 ENTRYPOINT ["/bin/bash"]
